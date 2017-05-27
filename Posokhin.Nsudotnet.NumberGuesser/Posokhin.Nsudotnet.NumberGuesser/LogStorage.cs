@@ -4,8 +4,8 @@ namespace Posokhin.Nsudotnet.NumberGuesser
 {
     class LogStorage
     {
-        private int Capacity;
-        private int CurrentOccupancy = 0;
+        public int Capacity { get; private set; }
+        public int CurrentOccupancy { get; private set; }
 
         private LogRecord[] Storage;
 
@@ -13,6 +13,7 @@ namespace Posokhin.Nsudotnet.NumberGuesser
         {
             this.Capacity = capacity;
             Storage = new LogRecord[Capacity];
+            CurrentOccupancy = 0;
         }
 
         public void AddRecord(LogRecord record)
@@ -36,18 +37,8 @@ namespace Posokhin.Nsudotnet.NumberGuesser
 
             for (int i = 0; i < CurrentOccupancy; ++i)
             {
-                Console.WriteLine("Type: {0}\tValue: {1}\n", Storage[i].GetMissType(), Storage[i].GetValue());
+                Console.WriteLine("Type: {0}\tValue: {1}\n", Storage[i].MissType, Storage[i].Value);
             }
-        }
-
-        public int GetCapacity()
-        {
-            return Capacity;
-        }
-
-        public int getOccupancy()
-        {
-            return CurrentOccupancy;
         }
     }
 

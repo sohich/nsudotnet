@@ -4,8 +4,8 @@ namespace Posokhin.Nsudotnet.NumberGuesser
 {
     class LogRecord
     {
-        private int Value;
-        private AnswerType MissType;
+        public int Value { get; private set; }
+        public AnswerType MissType { get; private set; }
 
         public LogRecord(int value, AnswerType type)
         {
@@ -13,14 +13,5 @@ namespace Posokhin.Nsudotnet.NumberGuesser
             this.MissType = type;
         }
 
-        public int GetValue()
-        {
-            return Value;
-        }
-
-        public AnswerType GetMissType()
-        {
-            return MissType;
-        }
     }
 }
