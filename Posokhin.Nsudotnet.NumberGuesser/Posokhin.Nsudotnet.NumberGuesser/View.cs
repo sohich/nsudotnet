@@ -19,7 +19,7 @@ namespace Posokhin.Nsudotnet.NumberGuesser
         {
             string message = Console.ReadLine();
 
-            if ("q".Equals(message))
+            if (message == "q")
             {
                 Handler.ProceedForceQuit();
             }
