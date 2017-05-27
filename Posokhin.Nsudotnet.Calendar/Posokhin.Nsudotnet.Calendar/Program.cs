@@ -84,14 +84,15 @@ namespace Posokhin.Nsudotnet.Calendar
             {
                 color = _selectedDayBackgroundColor;
             }
-            else if(day.Equals(DateTime.Today))
-            {
-                color = _currentDayBackgroundColor;
-            }
             else
             {
                 color = _defaultBackgroundColor;
             }
+            if(day.Equals(DateTime.Today))
+            {
+                color = _currentDayBackgroundColor;
+            }
+            
             Console.BackgroundColor = color;
         }
 
