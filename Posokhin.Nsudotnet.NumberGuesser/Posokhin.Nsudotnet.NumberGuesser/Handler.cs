@@ -26,11 +26,11 @@ namespace Posokhin.Nsudotnet.NumberGuesser
         private const string Goodbye = "Sorry that it was too hard for you! Gotta go cry to mama?";
         private string[] AffrontationsMessage = 
         {
-            "Trying like a lil' bitch!!\n",
-            "Don't give up, silly faggot!\n",
-            "Aww, so tired.. Go fuck yourself\n",
-            "I will hit you against the wall if you ain't gonna do it with your own head..\n",
-            "No idea? Try number of times when ur ass has been penetrated\n"
+            "Trying like a lil' bitch, {0}!!",
+            "{0}, don't give up, silly faggot!",
+            "Aww, so tired.. {0}, go fuck yourself",
+            "{0}! I will hit you against the wall if you ain't gonna do it with your own head..",
+            "No idea, {0}? Try number of times when ur ass has been penetrated"
         };
 
 
@@ -128,7 +128,7 @@ namespace Posokhin.Nsudotnet.NumberGuesser
             if (++MissCount % AffrontEquality == 0)
             {
                 int MessageNumber = Random.Next(0, AffrontationsMessage.Length);
-                Console.WriteLine(AffrontationsMessage[MessageNumber]);
+                Console.WriteLine(string.Format(AffrontationsMessage[MessageNumber], PlayerName));
             }
         }
         private int RequestNumber()
