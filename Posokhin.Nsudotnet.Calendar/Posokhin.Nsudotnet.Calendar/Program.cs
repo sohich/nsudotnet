@@ -7,13 +7,6 @@ namespace Posokhin.Nsudotnet.Calendar
     {
         private DateTime _selectedDay;
 
-        private const ConsoleColor _defaultBackgroundColor = ConsoleColor.White;
-        private const ConsoleColor _currentDayBackgroundColor = ConsoleColor.Gray;
-        private const ConsoleColor _selectedDayBackgroundColor = ConsoleColor.Blue;
-
-        private const ConsoleColor _defaultForegroundColor = ConsoleColor.Black;
-        private const ConsoleColor _weekendDayForegroundColor = ConsoleColor.Red;
-
 
         static void Main(string[] args)
         {
@@ -39,11 +32,11 @@ namespace Posokhin.Nsudotnet.Calendar
         private void DrawHeader()
         {
             string[] dayNames = new CultureInfo("en-US").DateTimeFormat.AbbreviatedDayNames;
-            Console.BackgroundColor = _defaultBackgroundColor;
+            ExtensionMethods.SetBackgroundByDefault();
 
             for(int i = 0; i <7; ++i)
             {
-                SetConsoleForegroundByDay((DayOfWeek)i);
+                ((DayOfWeek)i).SetConsoleForegroundByDay();
                 Console.Write("{0,4}", dayNames[i]);
             }
             Console.WriteLine();
@@ -54,7 +47,7 @@ namespace Posokhin.Nsudotnet.Calendar
             // filling empty beginning space
 
             DateTime firstDayOfMonth = new DateTime(_selectedDay.Year, _selectedDay.Month, 1);
-            Console.BackgroundColor = _defaultBackgroundColor;
+            ExtensionMethods.SetBackgroundByDefault();
             for(int i = 0; i < (int)firstDayOfMonth.DayOfWeek; ++i)
             {
                 Console.Write("{0,4}", string.Empty);
@@ -62,8 +55,8 @@ namespace Posokhin.Nsudotnet.Calendar
 
             for (DateTime day = firstDayOfMonth; day.Month == firstDayOfMonth.Month; day = day.AddDays(1))
             {
-                SetConsoleForegroundByDay(day.DayOfWeek);
-                SetConsoleBackgroundByDay(day);
+                day.DayOfWeek.SetConsoleForegroundByDay();
+                day.SetConsoleBackgroundByDay(_selectedDay);
                 Console.Write("{0,4}", day.Day);
 
                 if(day.DayOfWeek == DayOfWeek.Saturday)
@@ -71,50 +64,12 @@ namespace Posokhin.Nsudotnet.Calendar
                     Console.WriteLine();
                 }
             }
-            Console.BackgroundColor = _defaultForegroundColor;
-            Console.ForegroundColor = _defaultBackgroundColor;
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }
 
-        private void SetConsoleBackgroundByDay(DateTime day)
-        {
-            ConsoleColor color;
+      
 
-            if(day.Day == _selectedDay.Day)
-            {
-                color = _selectedDayBackgroundColor;
-            }
-            else
-            {
-                color = _defaultBackgroundColor;
-            }
-            if(day.Equals(DateTime.Today))
-            {
-                color = _currentDayBackgroundColor;
-            }
-            
-            Console.BackgroundColor = color;
-        }
-
-        private void SetConsoleForegroundByDay(DayOfWeek day)
-        {
-            ConsoleColor color;
-
-            if (CheckWeekend(day))
-            {
-                color = _weekendDayForegroundColor;
-            }
-            else
-            {
-                color = _defaultForegroundColor;
-            }
-            Console.ForegroundColor = color;
-        }
-
-        private bool CheckWeekend(DayOfWeek day)
-        {
-            return (day == DayOfWeek.Saturday)
-                || (day == DayOfWeek.Sunday);
-        }
     }
 }
