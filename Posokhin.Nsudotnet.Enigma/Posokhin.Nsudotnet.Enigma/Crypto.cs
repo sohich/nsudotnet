@@ -94,7 +94,7 @@ namespace Posokhin.Nsudotnet.Enigma
                 }
             }
 
-            Console.WriteLine("Successfully decrypted into {0}", outputFilePath);
+            Console.WriteLine("Successfully encrypted into {0}", outputFilePath);
         }
 
         public void Decrypt(string inputFilePath, string algorithm, string keyAndIVFilePath, string outputFilePath)
